@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Activity, Cpu, ShieldCheck, Building2, Layers, Map, TrendingUp } from "lucide-react";
-import { motion } from "framer-motion";
+import { Activity, Cpu, ShieldCheck, Building2, Layers, Map, TrendingUp, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Simple local UI primitives to avoid path aliases
 function Card({ children }) {
@@ -32,6 +32,7 @@ function Button({ children, className = "", variant = "solid", onClick }) {
  */
 export default function AnantaLinkWebsite() {
   const [darkMode, setDarkMode] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   // Enable smooth scrolling globally
   useEffect(() => {
@@ -45,48 +46,74 @@ export default function AnantaLinkWebsite() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const navItems = [
+    { label: "Platform", href: "#platform" },
+    { label: "Solutions", href: "#solutions" },
+    { label: "Architecture", href: "#architecture" },
+    { label: "Contact", href: "#contact" },
+  ];
+
   return (
     <div className={`min-h-screen ${darkMode ? "bg-[#0f172a] text-slate-100" : "bg-white text-slate-900"}`}>
 
       {/* Navigation */}
-      <nav className="px-8 py-6 max-w-7xl mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <img
-            src="/images/anantalink-logo.svg"
-            alt="AnantaLink Logo"
-            className="h-10"
-          />
-        </div>
+      <nav className="sticky top-0 z-50 px-6 md:px-8 py-4 max-w-7xl mx-auto flex items-center justify-between backdrop-blur bg-black/40">
+        <img src="/images/anantalink-logo.svg" alt="AnantaLink Logo" className="h-10" />
 
         <ul className={`hidden md:flex space-x-8 ${darkMode ? "text-slate-300" : "text-slate-600"}`}>
-          <li><a href="#platform" className="hover:text-white">Platform</a></li>
-          <li><a href="#solutions" className="hover:text-white">Solutions</a></li>
-          <li><a href="#architecture" className="hover:text-white">Architecture</a></li>
-          <li><a href="#contact" className="hover:text-white">Contact</a></li>
+          {navItems.map(item => (
+            <li key={item.href}><a href={item.href} className="hover:text-white">{item.label}</a></li>
+          ))}
         </ul>
 
-        <div className="flex items-center gap-4">
-          <Button
-            variant="outline"
-            className="px-3 py-2"
-            onClick={() => setDarkMode(!darkMode)}
-          >
+        <div className="flex items-center gap-3">
+          <Button variant="outline" className="px-3 py-2" onClick={() => setDarkMode(!darkMode)}>
             {darkMode ? "Light" : "Dark"}
           </Button>
+          <button className="md:hidden" onClick={() => setMenuOpen(true)} aria-label="Open menu">
+            <Menu />
+          </button>
         </div>
       </nav>
 
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="fixed inset-0 z-50 bg-black/70 backdrop-blur"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-[#020617] px-6 py-8"
+              initial={{ y: "-100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-100%" }}
+              transition={{ type: "spring", stiffness: 120 }}
+            >
+              <div className="flex items-center justify-between mb-8">
+                <img src="/images/anantalink-logo.svg" alt="AnantaLink Logo" className="h-10" />
+                <button onClick={() => setMenuOpen(false)} aria-label="Close menu">
+                  <X />
+                </button>
+              </div>
+              <ul className="flex flex-col gap-6 text-lg">
+                {navItems.map(item => (
+                  <li key={item.href}>
+                    <a href={item.href} onClick={() => setMenuOpen(false)}>{item.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Platform / Hero */}
-      <section
-        id="platform"
-        className="px-8 py-28 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center"
-      >
+      <section id="platform" className="px-8 py-28 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         <div>
-          <img
-            src="/images/anantalink-logo.svg"
-            alt="AnantaLink Logo"
-            className="h-14 mb-6"
-          />
+          <img src="/images/anantalink-logo.svg" alt="AnantaLink Logo" className="h-14 mb-6" />
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -106,9 +133,8 @@ export default function AnantaLinkWebsite() {
           <Button>Request Pilot Deployment</Button>
         </div>
 
-        <div className="rounded-2xl overflow-hidden shadow-lg">
+        <div className="rounded-2xl overflow-hidden shadow-lg hidden md:block">
           <img
-            // src="/images/hero-smart-hospital.jpg"
             src="https://ehealth.eletsonline.com/wp-content/uploads/2019/07/1.jpg"
             alt="Smart hospital IoMT ecosystem"
             className="w-full h-full object-cover"
@@ -120,7 +146,6 @@ export default function AnantaLinkWebsite() {
       <section className="px-8 py-20 bg-[#020617]">
         <div className="mb-12 max-w-7xl mx-auto rounded-2xl overflow-hidden shadow">
           <img
-            // src="/images/iomt-architecture.png"
             src="https://cdnintech.com/media/chapter/1186641/1750941997-382952735/media/F3.png"
             alt="AnantaLink modular IoMT architecture"
             className="w-full object-contain bg-white"
@@ -297,26 +322,3 @@ export default function AnantaLinkWebsite() {
     </div>
   );
 }
-
-/* ==========================
-   Basic Render Tests (Example)
-   ==========================
-
-import { render, screen } from "@testing-library/react";
-import AnantaLinkWebsite from "./AnantaLinkWebsite";
-
-describe("AnantaLinkWebsite", () => {
-  test("renders hero heading", () => {
-    render(<AnantaLinkWebsite />);
-    expect(screen.getByText(/SmartCare IoMT Ecosystem/i)).toBeInTheDocument();
-  });
-
-  test("renders navigation links", () => {
-    render(<AnantaLinkWebsite />);
-    expect(screen.getByText(/Platform/i)).toBeInTheDocument();
-    expect(screen.getByText(/Solutions/i)).toBeInTheDocument();
-    expect(screen.getByText(/Architecture/i)).toBeInTheDocument();
-    expect(screen.getByText(/Contact/i)).toBeInTheDocument();
-  });
-});
-*/
