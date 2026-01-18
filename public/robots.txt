@@ -7,3 +7,4 @@ Disallow: /private
 
 # Sitemap location
 Sitemap: https://anantalink.com/sitemap.xml
+Sitemap: https://anantalink.vercel.app/sitemap.xml
