@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Block irrelevant paths (future-proofing)
+Disallow: /admin
+Disallow: /private
+
+# Sitemap location
+Sitemap: https://anantalink.com/sitemap.xml
