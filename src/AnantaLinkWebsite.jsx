@@ -34,8 +34,6 @@ export default function AnantaLinkWebsite() {
   const [darkMode, setDarkMode] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const [darkMode, setDarkMode] = useState(true);
-
   // Enable smooth scrolling globally
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
@@ -95,225 +93,7 @@ export default function AnantaLinkWebsite() {
             <li><a onClick={() => setMenuOpen(false)} href="#contact">Contact</a></li>
           </ul>
         </div>
-      )
-
-      {/* Platform / Hero */}
-      <section
-        id="platform"
-        className="px-4 md:px-8 py-20 md:py-28 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-center"
-      >
-        <div>
-          <img
-            src="/images/anantalink-logo.svg"
-            alt="AnantaLink Logo"
-            className="h-14 mb-6"
-          />
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl sm:text-4xl md:text-6xl font-semibold mb-6 tracking-tight"
-          >
-            AnantaLink – SmartCare IoMT Ecosystem
-          </motion.h1>
-
-          <p className="text-xl text-slate-300 max-w-3xl mb-10">
-            Innovating care with connected solutions. A modular, edge-first IoMT
-            platform enabling hospitals to become smart, connected, and predictive
-            without heavy capital barriers.
-          </p>
-
-          <Button>Request Pilot Deployment</Button>
-        </div>
-
-        <div className="rounded-2xl overflow-hidden shadow-lg">
-          <img
-            src="/images/hero-smart-hospital.jpg"
-            alt="Smart hospital IoMT ecosystem"
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </section>
-
-      {/* Vision & Mission */}
-      <section className="px-8 py-20 bg-[#020617]">
-        <div className="mb-12 max-w-7xl mx-auto rounded-2xl overflow-hidden shadow">
-          <img
-            src="/images/iomt-architecture.png"
-            alt="AnantaLink modular IoMT architecture"
-            className="w-full object-contain bg-white"
-          />
-        </div>
-
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          <Card>
-            <CardContent>
-              <TrendingUp className="w-10 h-10 mb-4 text-emerald-700" />
-              <h3 className="text-xl font-semibold mb-2">Vision</h3>
-              <p className="text-gray-600">
-                To make every hospital smart, connected, and predictive without
-                imposing high CAPEX or rigid OEM lock-in.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent>
-              <Activity className="w-10 h-10 mb-4 text-emerald-700" />
-              <h3 className="text-xl font-semibold mb-2">Mission</h3>
-              <p className="text-gray-600">
-                Enable real-time monitoring, action, and optimization through
-                modular IoMT devices and intelligent data integration.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent>
-              <Map className="w-10 h-10 mb-4 text-emerald-700" />
-              <h3 className="text-xl font-semibold mb-2">Long-Term Goal</h3>
-              <p className="text-gray-600">
-                Build India’s first AI-driven hospital digital twin network
-                connecting patients, assets, staff, and environments.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Solutions */}
-      <section id="solutions" className="px-4 md:px-8 py-20 md:py-28 max-w-7xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-emerald-800">
-          Healthcare Solutions Portfolio
-        </h2>
-        <p className="text-slate-400 mb-12 max-w-3xl">
-          Purpose-built IoMT modules exclusively for hospitals and healthcare systems.
-          No cross-industry dilution. No generic IoT compromises.
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <Card>
-            <CardContent>
-              <Building2 className="w-10 h-10 mb-4 text-emerald-700" />
-              <h3 className="text-xl font-semibold mb-3">Operational Efficiency</h3>
-              <ul className="text-gray-600 list-disc pl-5 space-y-1">
-                <li>Asset & patient tracking</li>
-                <li>Queue & flow optimization</li>
-                <li>Wayfinding & entrance management</li>
-                <li>Contact tracing</li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent>
-              <Activity className="w-10 h-10 mb-4 text-emerald-700" />
-              <h3 className="text-xl font-semibold mb-3">Patient Safety & Care</h3>
-              <ul className="text-gray-600 list-disc pl-5 space-y-1">
-                <li>Remote patient & vitals monitoring</li>
-                <li>Fall & bedsore intervention</li>
-                <li>Cold-chain & room condition monitoring</li>
-                <li>Automatic EMR data transfer</li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent>
-              <ShieldCheck className="w-10 h-10 mb-4 text-emerald-700" />
-              <h3 className="text-xl font-semibold mb-3">Compliance & Clinical Ops</h3>
-              <ul className="text-gray-600 list-disc pl-5 space-y-1">
-                <li>NABH/JCI readiness</li>
-                <li>AI-based resource scheduling</li>
-                <li>Audit-ready reporting</li>
-                <li>Post-operative & inpatient care workflows</li>
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Architecture */}
-      <section id="architecture" className="px-4 md:px-8 py-20 md:py-24 bg-[#020617]">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-10 text-emerald-800">
-            Modular Architecture
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card>
-              <CardContent>
-                <Layers className="w-10 h-10 mb-4 text-emerald-700" />
-                <h3 className="text-xl font-semibold mb-2">Tracking Layer</h3>
-                <p className="text-gray-600">
-                  People, assets, devices, and environment data captured via
-                  plug-and-play IoMT hardware.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent>
-                <Cpu className="w-10 h-10 mb-4 text-emerald-700" />
-                <h3 className="text-xl font-semibold mb-2">Edge & Communication</h3>
-                <p className="text-gray-600">
-                  BLE gateways and routers ensure low-latency, resilient data
-                  collection even in constrained environments.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent>
-                <ShieldCheck className="w-10 h-10 mb-4 text-emerald-700" />
-                <h3 className="text-xl font-semibold mb-2">Platform & Digital Twin</h3>
-                <p className="text-gray-600">
-                  Unified IoMT platform with dashboards, APIs, and AI-ready digital
-                  twin foundation.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section id="contact" className="px-4 md:px-8 py-20 md:py-24 max-w-7xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-emerald-800">Contact & Pilots</h2>
-        <p className="text-slate-400 max-w-3xl mb-10">
-          We work closely with hospitals, health systems, and government bodies
-          to deploy pilot programs and validate real-world impact.
-        </p>
-        <div className="flex flex-col md:flex-row gap-6">
-          <div className="text-sm text-slate-400">
-            <p>Email: contact@anantalink.com</p>
-            <p>Phone: +91-XXXXXXXXXX</p>
-            <p>Location: India</p>
-          </div>
-          <Button>Request Pilot Deployment</Button>
-          <Button variant="outline">Contact Sales</Button>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="px-4 md:px-8 py-12 md:py-16 bg-black text-slate-400">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between">
-          <p>© {new Date().getFullYear()} AnantaLink Technology Pvt. Ltd.</p>
-          <p>Modular. Predictive. Built for Indian healthcare reality.</p>
-        </div>
-      </footer>
-
-      {/* SEO Keyword Content */}
-      <section className="sr-only">
-        <h2>Smart Hospital IoMT Platform India</h2>
-        <p>
-          AnantaLink is a healthcare IoMT platform for smart hospitals in India,
-          enabling patient monitoring, asset tracking, hospital automation,
-          digital twins, remote patient monitoring, BLE-based IoT systems,
-          healthcare analytics, NABH compliance, and AI-driven hospital operations.
-        </p>
-      </section>
+      )}
 
       {/* Back to Top */}
       <button
@@ -331,6 +111,11 @@ export default function AnantaLinkWebsite() {
 /* ==========================
    Basic Render Tests (Example)
    ==========================
+
+   NOTE:
+   These tests are intentionally commented out because this file
+   is a runtime React component, not a test module.
+   Move the below code to a *.test.jsx file when setting up tests.
 
 import { render, screen } from "@testing-library/react";
 import AnantaLinkWebsite from "./AnantaLinkWebsite";
