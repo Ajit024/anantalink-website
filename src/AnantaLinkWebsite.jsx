@@ -24,13 +24,128 @@ function Button({ children, className = "", variant = "solid", onClick }) {
   );
 }
 
-/**
- * AnantaLink Website
- * - Single-page layout
- * - Anchor-based navigation
- * - Healthcare-only focus
- */
+// SEO helpers
+function useSEO() {
+  useEffect(() => {
+    document.title = "AnantaLink | SmartCare IoMT Platform for Hospitals";
+
+    const meta = [
+      {
+        name: "description",
+        content:
+          "AnantaLink is a healthcare-first IoMT platform enabling smart hospitals through patient monitoring, asset tracking, compliance, and digital twin architecture.",
+      },
+      {
+        name: "keywords",
+        content:
+          "IoMT platform, smart hospital, healthcare IoT, hospital asset tracking, patient monitoring system, NABH compliance, digital twin healthcare, hospital automation India",
+      },
+      { name: "robots", content: "index, follow" },
+      { property: "og:title", content: "AnantaLink – SmartCare IoMT Ecosystem" },
+      {
+        property: "og:description",
+        content:
+          "Healthcare-first IoMT ecosystem for smart hospitals, digital twins, and compliant operations.",
+      },
+      { property: "og:type", content: "website" },
+    ];
+
+    meta.forEach(({ name, property, content }) => {
+      let tag = document.querySelector(
+        `meta[${name ? "name" : "property"}="${name || property}"]`
+      );
+      if (!tag) {
+        tag = document.createElement("meta");
+        if (name) tag.setAttribute("name", name);
+        if (property) tag.setAttribute("property", property);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute("content", content);
+    });
+
+    // Structured data (JSON-LD) – Organization
+    const ld = document.createElement("script");
+    ld.type = "application/ld+json";
+    ld.innerHTML = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "AnantaLink Technology Pvt. Ltd.",
+      url: "https://anantalink.com",
+      description:
+        "Healthcare-first IoMT platform for smart hospitals, patient monitoring, asset tracking, and digital twin architecture.",
+      industry: "Healthcare IoMT",
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+91-9815758978",
+        contactType: "sales",
+        areaServed: "IN",
+      },
+    });
+    document.head.appendChild(ld);
+
+    // Structured data – Website (AI search engines prefer this)
+    const ldWebsite = document.createElement("script");
+    ldWebsite.type = "application/ld+json";
+    ldWebsite.innerHTML = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "AnantaLink",
+      url: "https://anantalink.com",
+      potentialAction: {
+        "@type": "SearchAction",
+        target: "https://anantalink.com/?q={search_term_string}",
+        "query-input": "required name=search_term_string",
+      },
+    });
+    document.head.appendChild(ldWebsite);
+
+    // Structured data – FAQ (used by Google SGE / AI answers)
+    const ldFAQ = document.createElement("script");
+    ldFAQ.type = "application/ld+json";
+    ldFAQ.innerHTML = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is AnantaLink?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "AnantaLink is a healthcare-first IoMT platform that helps hospitals monitor patients, track assets, and build AI-ready digital twins.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Who is AnantaLink for?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "AnantaLink is designed exclusively for hospitals, healthcare systems, and government healthcare infrastructure.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Does AnantaLink support NABH or JCI compliance?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "Yes. AnantaLink supports compliance workflows such as NABH and JCI through monitoring, reporting, and audit-ready data pipelines.",
+          },
+        },
+      ],
+    });
+    document.head.appendChild(ldFAQ);
+
+    return () => {
+      document.head.removeChild(ld);
+    };
+  }, []);
+}
+
 export default function AnantaLinkWebsite() {
+  useSEO();
+
   const [darkMode, setDarkMode] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -54,15 +169,22 @@ export default function AnantaLinkWebsite() {
   ];
 
   return (
-    <div className={`min-h-screen ${darkMode ? "bg-[#0f172a] text-slate-100" : "bg-white text-slate-900"}`}>
-
+    <div
+      className={`min-h-screen ${
+        darkMode ? "bg-[#0f172a] text-slate-100" : "bg-white text-slate-900"
+      }`}
+    >
       {/* Navigation */}
       <nav className="sticky top-0 z-50 px-6 md:px-8 py-4 max-w-7xl mx-auto flex items-center justify-between backdrop-blur bg-black/40">
         <img src="/images/anantalink-logo.svg" alt="AnantaLink Logo" className="h-10" />
 
         <ul className={`hidden md:flex space-x-8 ${darkMode ? "text-slate-300" : "text-slate-600"}`}>
-          {navItems.map(item => (
-            <li key={item.href}><a href={item.href} className="hover:text-white">{item.label}</a></li>
+          {navItems.map((item) => (
+            <li key={item.href}>
+              <a href={item.href} className="hover:text-white">
+                {item.label}
+              </a>
+            </li>
           ))}
         </ul>
 
@@ -99,9 +221,11 @@ export default function AnantaLinkWebsite() {
                 </button>
               </div>
               <ul className="flex flex-col gap-6 text-lg">
-                {navItems.map(item => (
+                {navItems.map((item) => (
                   <li key={item.href}>
-                    <a href={item.href} onClick={() => setMenuOpen(false)}>{item.label}</a>
+                    <a href={item.href} onClick={() => setMenuOpen(false)}>
+                      {item.label}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -190,9 +314,7 @@ export default function AnantaLinkWebsite() {
 
       {/* Solutions */}
       <section id="solutions" className="px-8 py-28 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold mb-4 text-emerald-800">
-          Healthcare Solutions Portfolio
-        </h2>
+        <h2 className="text-3xl font-bold mb-4 text-emerald-800">Healthcare Solutions Portfolio</h2>
         <p className="text-slate-400 mb-12 max-w-3xl">
           Purpose-built IoMT modules exclusively for hospitals and healthcare systems.
           No cross-industry dilution. No generic IoT compromises.
@@ -243,9 +365,7 @@ export default function AnantaLinkWebsite() {
       {/* Architecture */}
       <section id="architecture" className="px-8 py-24 bg-[#020617]">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-10 text-emerald-800">
-            Modular Architecture
-          </h2>
+          <h2 className="text-3xl font-bold mb-10 text-emerald-800">Modular Architecture</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card>
@@ -318,7 +438,6 @@ export default function AnantaLinkWebsite() {
       >
         ↑
       </button>
-
     </div>
   );
 }
