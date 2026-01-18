@@ -32,6 +32,9 @@ function Button({ children, className = "", variant = "solid", onClick }) {
  */
 export default function AnantaLinkWebsite() {
   const [darkMode, setDarkMode] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const [darkMode, setDarkMode] = useState(true);
 
   // Enable smooth scrolling globally
   useEffect(() => {
@@ -49,7 +52,7 @@ export default function AnantaLinkWebsite() {
     <div className={`min-h-screen ${darkMode ? "bg-[#0f172a] text-slate-100" : "bg-white text-slate-900"}`}>
 
       {/* Navigation */}
-      <nav className="px-8 py-6 max-w-7xl mx-auto flex items-center justify-between">
+      <nav className="px-4 md:px-8 py-4 md:py-6 max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-4">
           <img
             src="/images/anantalink-logo.svg"
@@ -65,7 +68,14 @@ export default function AnantaLinkWebsite() {
           <li><a href="#contact" className="hover:text-white">Contact</a></li>
         </ul>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4">
+          <button
+            className="md:hidden text-xl"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            ☰
+          </button>
           <Button
             variant="outline"
             className="px-3 py-2"
@@ -76,10 +86,21 @@ export default function AnantaLinkWebsite() {
         </div>
       </nav>
 
+      {menuOpen && (
+        <div className={`md:hidden px-4 pb-6 ${darkMode ? "bg-[#0f172a]" : "bg-white"}`}>
+          <ul className="flex flex-col gap-4">
+            <li><a onClick={() => setMenuOpen(false)} href="#platform">Platform</a></li>
+            <li><a onClick={() => setMenuOpen(false)} href="#solutions">Solutions</a></li>
+            <li><a onClick={() => setMenuOpen(false)} href="#architecture">Architecture</a></li>
+            <li><a onClick={() => setMenuOpen(false)} href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      )
+
       {/* Platform / Hero */}
       <section
         id="platform"
-        className="px-8 py-28 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center"
+        className="px-4 md:px-8 py-20 md:py-28 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-center"
       >
         <div>
           <img
@@ -92,7 +113,7 @@ export default function AnantaLinkWebsite() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-5xl md:text-6xl font-semibold mb-6 tracking-tight"
+            className="text-3xl sm:text-4xl md:text-6xl font-semibold mb-6 tracking-tight"
           >
             AnantaLink – SmartCare IoMT Ecosystem
           </motion.h1>
@@ -108,8 +129,7 @@ export default function AnantaLinkWebsite() {
 
         <div className="rounded-2xl overflow-hidden shadow-lg">
           <img
-            // src="/images/hero-smart-hospital.jpg"
-            src="https://ehealth.eletsonline.com/wp-content/uploads/2019/07/1.jpg"
+            src="/images/hero-smart-hospital.jpg"
             alt="Smart hospital IoMT ecosystem"
             className="w-full h-full object-cover"
           />
@@ -120,8 +140,7 @@ export default function AnantaLinkWebsite() {
       <section className="px-8 py-20 bg-[#020617]">
         <div className="mb-12 max-w-7xl mx-auto rounded-2xl overflow-hidden shadow">
           <img
-            // src="/images/iomt-architecture.png"
-            src="https://cdnintech.com/media/chapter/1186641/1750941997-382952735/media/F3.png"
+            src="/images/iomt-architecture.png"
             alt="AnantaLink modular IoMT architecture"
             className="w-full object-contain bg-white"
           />
@@ -164,8 +183,8 @@ export default function AnantaLinkWebsite() {
       </section>
 
       {/* Solutions */}
-      <section id="solutions" className="px-8 py-28 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold mb-4 text-emerald-800">
+      <section id="solutions" className="px-4 md:px-8 py-20 md:py-28 max-w-7xl mx-auto">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-emerald-800">
           Healthcare Solutions Portfolio
         </h2>
         <p className="text-slate-400 mb-12 max-w-3xl">
@@ -216,9 +235,9 @@ export default function AnantaLinkWebsite() {
       </section>
 
       {/* Architecture */}
-      <section id="architecture" className="px-8 py-24 bg-[#020617]">
+      <section id="architecture" className="px-4 md:px-8 py-20 md:py-24 bg-[#020617]">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-10 text-emerald-800">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-10 text-emerald-800">
             Modular Architecture
           </h2>
 
@@ -260,8 +279,8 @@ export default function AnantaLinkWebsite() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="px-8 py-24 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold mb-6 text-emerald-800">Contact & Pilots</h2>
+      <section id="contact" className="px-4 md:px-8 py-20 md:py-24 max-w-7xl mx-auto">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-emerald-800">Contact & Pilots</h2>
         <p className="text-slate-400 max-w-3xl mb-10">
           We work closely with hospitals, health systems, and government bodies
           to deploy pilot programs and validate real-world impact.
@@ -269,7 +288,7 @@ export default function AnantaLinkWebsite() {
         <div className="flex flex-col md:flex-row gap-6">
           <div className="text-sm text-slate-400">
             <p>Email: contact@anantalink.com</p>
-            <p>Phone: +91-9815758978</p>
+            <p>Phone: +91-XXXXXXXXXX</p>
             <p>Location: India</p>
           </div>
           <Button>Request Pilot Deployment</Button>
@@ -278,12 +297,23 @@ export default function AnantaLinkWebsite() {
       </section>
 
       {/* Footer */}
-      <footer className="px-8 py-16 bg-black text-slate-400">
+      <footer className="px-4 md:px-8 py-12 md:py-16 bg-black text-slate-400">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between">
           <p>© {new Date().getFullYear()} AnantaLink Technology Pvt. Ltd.</p>
           <p>Modular. Predictive. Built for Indian healthcare reality.</p>
         </div>
       </footer>
+
+      {/* SEO Keyword Content */}
+      <section className="sr-only">
+        <h2>Smart Hospital IoMT Platform India</h2>
+        <p>
+          AnantaLink is a healthcare IoMT platform for smart hospitals in India,
+          enabling patient monitoring, asset tracking, hospital automation,
+          digital twins, remote patient monitoring, BLE-based IoT systems,
+          healthcare analytics, NABH compliance, and AI-driven hospital operations.
+        </p>
+      </section>
 
       {/* Back to Top */}
       <button
