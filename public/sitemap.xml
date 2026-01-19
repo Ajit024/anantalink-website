@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <url>
+  <!-- <url>
     <loc>https://anantalink.com/</loc>
     <priority>1.0</priority>
   </url>
@@ -23,7 +23,7 @@
   <url>
     <loc>https://anantalink.com/#contact</loc>
     <priority>0.8</priority>
-  </url>
+  </url> -->
 
   <url>
     <loc>https://anantalink.vercel.app/</loc>
@@ -50,7 +50,7 @@
     <priority>0.8</priority>
   </url>
 
-  
+
 
 
 </urlset>
